@@ -34,9 +34,11 @@ class EntityExtractor:
         # Define extraction patterns for each intent category
         self.patterns = {
             "open_file": self._build_file_patterns(),
+            "create_file": self._build_create_file_patterns(),
             "create_function": self._build_function_patterns(),
             "git_commit": self._build_commit_patterns(),
             "git_push": self._build_push_patterns(),
+            "git_status": [],  # No entities needed for git status
             "install_package": self._build_package_patterns(),
             "open_browser": self._build_browser_patterns(),
             "search_content": self._build_search_patterns(),
@@ -60,6 +62,26 @@ class EntityExtractor:
             {
                 "key": "file",
                 "regex": r'(?:the |file )?([a-zA-Z0-9_\-]+(?:\.[a-zA-Z0-9]+)?)',  # Loose match
+                "priority": 3
+            }
+        ]
+    
+    def _build_create_file_patterns(self) -> List[Dict]:
+        """Patterns for extracting filenames when creating files."""
+        return [
+            {
+                "key": "file",
+                "regex": r'(?:create|make|new)\s+(?:file|a file|new file)\s+([a-zA-Z0-9_\-./\\]+\.[a-zA-Z0-9]+)',
+                "priority": 1
+            },
+            {
+                "key": "file",
+                "regex": r'(?:file)\s+([a-zA-Z0-9_\-./\\]+\.[a-zA-Z0-9]+)',
+                "priority": 2
+            },
+            {
+                "key": "file",
+                "regex": r'([a-zA-Z0-9_\-./\\]+\.[a-zA-Z0-9]+)',  # Any filename pattern
                 "priority": 3
             }
         ]
