@@ -106,7 +106,7 @@ class FileExecutor(BaseExecutor):
         return path.resolve()
     
     async def _open_file(self, context: TaskContext) -> TaskResult:
-        """Open a file (simulate opening in editor)."""
+        """Open a file in VS Code or default system application."""
         start_time = time.time()
         
         file_path = context.params.get("file", "")
@@ -126,13 +126,46 @@ class FileExecutor(BaseExecutor):
                 latency_ms=latency_ms
             )
         
-        latency_ms = (time.time() - start_time) * 1000
-        return self._create_success_result(
-            task_id=context.task_id,
-            output=f"Opened file: {path}",
-            latency_ms=latency_ms,
-            metadata={"file_path": str(path)}
-        )
+        try:
+            # Try VS Code first (preferred for code files)
+            process = await asyncio.create_subprocess_exec(
+                "code",
+                str(path.absolute()),
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE
+            )
+            
+            # Don't wait for VS Code to exit (it launches async)
+            await asyncio.sleep(0.2)  # Brief wait to check if command failed
+            
+            latency_ms = (time.time() - start_time) * 1000
+            return self._create_success_result(
+                task_id=context.task_id,
+                output=f"Opened file in VS Code: {path}",
+                latency_ms=latency_ms,
+                metadata={"file_path": str(path), "method": "vscode"}
+            )
+            
+        except FileNotFoundError:
+            # VS Code not available, use Windows default application
+            try:
+                import os
+                os.startfile(str(path.absolute()))
+                
+                latency_ms = (time.time() - start_time) * 1000
+                return self._create_success_result(
+                    task_id=context.task_id,
+                    output=f"Opened file with default app: {path}",
+                    latency_ms=latency_ms,
+                    metadata={"file_path": str(path), "method": "default_app"}
+                )
+            except Exception as e:
+                latency_ms = (time.time() - start_time) * 1000
+                return self._create_error_result(
+                    task_id=context.task_id,
+                    error=f"Failed to open file: {str(e)}",
+                    latency_ms=latency_ms
+                )
     
     async def _create_file(self, context: TaskContext) -> TaskResult:
         """Create a new file with optional content."""
