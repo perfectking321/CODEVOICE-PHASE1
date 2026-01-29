@@ -222,41 +222,39 @@ class CodeVoiceDemo:
         print(f"\n{Fore.CYAN}Press Ctrl+C to stop{Style.RESET_ALL}\n")
         
         try:
-            # Start listening
-            async for audio_chunk in self.microphone.stream_audio():
-                # Detect speech
-                is_speech = self.vad.is_speech(audio_chunk)
-                
-                if not is_speech:
-                    continue
-                
-                print(f"{Fore.YELLOW}🎤 Speech detected, listening...{Style.RESET_ALL}")
-                
-                # Collect speech audio
-                speech_audio = [audio_chunk]
+            while True:
+                # Listen for speech
+                speech_audio = []
                 silence_count = 0
+                is_collecting = False
                 
-                async for chunk in self.microphone.stream_audio():
-                    is_speech_chunk = self.vad.is_speech(chunk)
+                async for audio_chunk in self.microphone.stream_audio(duration=30.0):
+                    # Detect speech
+                    is_speech = self.vad.is_speech(audio_chunk)
                     
-                    if is_speech_chunk:
-                        speech_audio.append(chunk)
+                    if is_speech:
+                        if not is_collecting:
+                            print(f"{Fore.YELLOW}🎤 Speech detected, listening...{Style.RESET_ALL}")
+                            is_collecting = True
+                        speech_audio.append(audio_chunk)
                         silence_count = 0
-                    else:
+                    elif is_collecting:
                         silence_count += 1
                         if silence_count > 10:  # ~320ms silence
+                            # Process the collected speech
                             break
                 
-                # Transcribe
-                print(f"{Fore.YELLOW}🔄 Transcribing...{Style.RESET_ALL}")
-                transcription = self.asr.transcribe(b''.join(speech_audio))
-                
-                if transcription['text'].strip():
-                    # Process command
-                    await self.process_command(transcription['text'])
-                
-                print(f"\n{Fore.CYAN}{'─'*60}{Style.RESET_ALL}")
-                print(f"{Fore.CYAN}Ready for next command...{Style.RESET_ALL}\n")
+                if speech_audio:
+                    # Transcribe
+                    print(f"{Fore.YELLOW}🔄 Transcribing...{Style.RESET_ALL}")
+                    transcription = self.asr.transcribe(b''.join(speech_audio))
+                    
+                    if transcription['text'].strip():
+                        # Process command
+                        await self.process_command(transcription['text'])
+                    
+                    print(f"\n{Fore.CYAN}{'─'*60}{Style.RESET_ALL}")
+                    print(f"{Fore.CYAN}Ready for next command...{Style.RESET_ALL}\n")
         
         except KeyboardInterrupt:
             print(f"\n\n{Fore.CYAN}Shutting down...{Style.RESET_ALL}")
