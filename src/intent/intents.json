@@ -1,0 +1,184 @@
+{
+  "intents": {
+    "open_file": {
+      "description": "Open or navigate to a file in the editor",
+      "category": "file_operation",
+      "examples": [
+        "open main.py",
+        "open the config file",
+        "show me utils.js",
+        "navigate to test.py",
+        "open file main"
+      ],
+      "keywords": ["open", "show", "navigate", "file", "edit"]
+    },
+    "create_function": {
+      "description": "Create a new function or method",
+      "category": "code_generation",
+      "examples": [
+        "create a function to parse json",
+        "add a new method for validation",
+        "write a function that calculates sum",
+        "generate a helper function",
+        "make a new function"
+      ],
+      "keywords": ["create", "add", "write", "generate", "function", "method"]
+    },
+    "run_tests": {
+      "description": "Execute test suite or specific tests",
+      "category": "testing",
+      "examples": [
+        "run tests",
+        "run all tests",
+        "execute test suite",
+        "test the application",
+        "run unit tests"
+      ],
+      "keywords": ["run", "execute", "test", "pytest", "unittest"]
+    },
+    "git_commit": {
+      "description": "Commit changes to git repository",
+      "category": "version_control",
+      "examples": [
+        "commit changes",
+        "git commit",
+        "commit with message fix bug",
+        "save changes to git",
+        "commit this"
+      ],
+      "keywords": ["commit", "git", "save", "stage"]
+    },
+    "git_push": {
+      "description": "Push commits to remote repository",
+      "category": "version_control",
+      "examples": [
+        "push to origin",
+        "git push",
+        "push changes",
+        "push to main branch",
+        "upload commits"
+      ],
+      "keywords": ["push", "upload", "remote", "origin"]
+    },
+    "build_project": {
+      "description": "Build or compile the project",
+      "category": "build",
+      "examples": [
+        "build project",
+        "compile the code",
+        "build the application",
+        "run build script",
+        "make build"
+      ],
+      "keywords": ["build", "compile", "make", "package"]
+    },
+    "search_code": {
+      "description": "Search for code patterns or definitions",
+      "category": "navigation",
+      "examples": [
+        "search for function definition",
+        "find class User",
+        "search code for imports",
+        "locate the main function",
+        "find where variable is used"
+      ],
+      "keywords": ["search", "find", "locate", "grep", "definition"]
+    },
+    "explain_code": {
+      "description": "Explain or describe code functionality",
+      "category": "documentation",
+      "examples": [
+        "explain this function",
+        "what does this code do",
+        "describe the class",
+        "explain the algorithm",
+        "how does this work"
+      ],
+      "keywords": ["explain", "describe", "what", "how", "documentation"]
+    },
+    "refactor_code": {
+      "description": "Refactor or improve code structure",
+      "category": "code_improvement",
+      "examples": [
+        "refactor this function",
+        "improve the code structure",
+        "optimize this method",
+        "clean up the code",
+        "simplify this logic"
+      ],
+      "keywords": ["refactor", "improve", "optimize", "clean", "simplify"]
+    },
+    "debug_error": {
+      "description": "Debug or fix errors in code",
+      "category": "debugging",
+      "examples": [
+        "debug the error",
+        "fix this bug",
+        "find the issue",
+        "why is this failing",
+        "troubleshoot the problem"
+      ],
+      "keywords": ["debug", "fix", "error", "bug", "issue", "problem"]
+    },
+    "open_terminal": {
+      "description": "Open terminal or command prompt",
+      "category": "system",
+      "examples": [
+        "open terminal",
+        "launch command prompt",
+        "open powershell",
+        "start terminal",
+        "show terminal"
+      ],
+      "keywords": ["terminal", "command", "prompt", "powershell", "shell"]
+    },
+    "install_package": {
+      "description": "Install packages or dependencies",
+      "category": "package_management",
+      "examples": [
+        "install numpy",
+        "install package requests",
+        "add dependency flask",
+        "pip install pytest",
+        "install the requirements"
+      ],
+      "keywords": ["install", "add", "pip", "npm", "package", "dependency"]
+    },
+    "open_browser": {
+      "description": "Open browser or navigate to URL",
+      "category": "browser",
+      "examples": [
+        "open youtube",
+        "open browser",
+        "go to google",
+        "navigate to github",
+        "launch stackoverflow"
+      ],
+      "keywords": ["open", "browser", "navigate", "go", "url", "website"]
+    },
+    "search_content": {
+      "description": "Search for content online or in documentation",
+      "category": "search",
+      "examples": [
+        "search for python tutorial",
+        "look up how to use asyncio",
+        "search documentation for requests",
+        "find examples of flask",
+        "search youtube for song"
+      ],
+      "keywords": ["search", "look", "find", "google", "documentation"]
+    },
+    "general_query": {
+      "description": "General questions or queries not fitting other categories",
+      "category": "general",
+      "examples": [
+        "what is the time",
+        "how are you",
+        "what can you do",
+        "tell me about this project",
+        "help me with something"
+      ],
+      "keywords": ["what", "how", "tell", "help", "explain"]
+    }
+  }
+}
