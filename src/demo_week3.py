@@ -249,11 +249,11 @@ class CodeVoiceDemo:
                 
                 # Transcribe
                 print(f"{Fore.YELLOW}🔄 Transcribing...{Style.RESET_ALL}")
-                transcription = await self.asr.transcribe(b''.join(speech_audio))
+                transcription = self.asr.transcribe(b''.join(speech_audio))
                 
-                if transcription.text.strip():
+                if transcription['text'].strip():
                     # Process command
-                    await self.process_command(transcription.text)
+                    await self.process_command(transcription['text'])
                 
                 print(f"\n{Fore.CYAN}{'─'*60}{Style.RESET_ALL}")
                 print(f"{Fore.CYAN}Ready for next command...{Style.RESET_ALL}\n")
