@@ -161,8 +161,14 @@ class CodeVoiceDemo:
             file = entities.get("file", "")
             return f"open {file}"
         
+        elif intent == "create_file":
+            file = entities.get("file", "new_file.txt")
+            content = entities.get("content", "")
+            return f"create {file}"
+        
         elif intent == "create_function":
             name = entities.get("function_name", "new_function")
+            return f"create {name}.py"
             return f"create {name}.py"
         
         # Build commands
@@ -202,7 +208,7 @@ class CodeVoiceDemo:
             Executor instance
         """
         # File operations
-        if intent in ["open_file", "create_function"]:
+        if intent in ["open_file", "create_file", "create_function"]:
             return self.file_executor
         
         # Everything else uses PowerShell

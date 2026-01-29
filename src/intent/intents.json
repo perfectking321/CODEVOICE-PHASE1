@@ -8,9 +8,22 @@
         "open the config file",
         "show me utils.js",
         "navigate to test.py",
-        "open file main"
+        "open file main",
+        "display readme file"
       ],
-      "keywords": ["open", "show", "navigate", "file", "edit"]
+      "keywords": ["open", "show", "navigate", "file", "edit", "display"]
+    },
+    "create_file": {
+      "description": "Create a new file",
+      "category": "file_operation",
+      "examples": [
+        "create file test.py",
+        "create a new file hello.py",
+        "make a file config.json",
+        "create new file main.js",
+        "make file settings.yaml"
+      ],
+      "keywords": ["create", "make", "new", "file"]
     },
     "create_function": {
       "description": "Create a new function or method",
@@ -20,7 +33,8 @@
         "add a new method for validation",
         "write a function that calculates sum",
         "generate a helper function",
-        "make a new function"
+        "make a new function",
+        "create function parse_data"
       ],
       "keywords": ["create", "add", "write", "generate", "function", "method"]
     },
@@ -59,6 +73,19 @@
         "upload commits"
       ],
       "keywords": ["push", "upload", "remote", "origin"]
+    },
+    "git_status": {
+      "description": "Check git repository status",
+      "category": "version_control",
+      "examples": [
+        "git status",
+        "check git status",
+        "show repository status",
+        "check status",
+        "what changed",
+        "show git changes"
+      ],
+      "keywords": ["status", "check", "show", "git", "changed"]
     },
     "build_project": {
       "description": "Build or compile the project",
@@ -151,10 +178,13 @@
         "open youtube",
         "open browser",
         "go to google",
+        "open google",
         "navigate to github",
-        "launch stackoverflow"
+        "launch stackoverflow",
+        "open facebook",
+        "go to twitter"
       ],
-      "keywords": ["open", "browser", "navigate", "go", "url", "website"]
+      "keywords": ["open", "browser", "navigate", "go", "url", "website", "google", "youtube"]
     },
     "search_content": {
       "description": "Search for content online or in documentation",
